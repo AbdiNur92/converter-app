@@ -3,6 +3,7 @@ package se.lexicon;
 import java.util.Locale;
 
 public class ConverterApp {
+    //Constants
     //TEMP
     static final double CELSIUS_TO_FAHRENHEIT = 9.0 / 5.0;
     static final double FAHRENHEIT_TO_CELSIUS = 5.0 / 9.0;
@@ -14,7 +15,12 @@ public class ConverterApp {
     static final double NORMAL_WEIGHT_FROM = 18.5;
     static final double OVERWEIGHT_FROM = 25.0;
     static final double OBESE_FROM = 30.0;
+    //FAKEGUI
+    static final String LINE = "==================================";
 
+
+
+    //Methods
     static double celsiusToFahrenheit(double celsius) {
         return celsius * CELSIUS_TO_FAHRENHEIT + 32;
     }
@@ -44,6 +50,16 @@ public class ConverterApp {
             return "Obese";
         }
     }
+    static void printMenu() {
+        IO.println(LINE);
+        IO.println("      LEXICON CONVERTER APP");
+        IO.println(LINE);
+        IO.println("1. Temperature Converter");
+        IO.println("2. Currency Converter");
+        IO.println("3. BMI Calculator");
+        IO.println("4. Exit");
+        IO.println(LINE);
+    }
 
     // constants: rates and fixed values
     // one method per conversion, return result
@@ -53,15 +69,10 @@ public class ConverterApp {
     // Loop menu, convert. until exit "Continue (yes/no)".
 
     void main () {
-        IO.println("LEXICON CONVERTER APP");
-        IO.println(celsiusToFahrenheit(100)); // 212.0
-        IO.println(fahrenheitToCelsius(212)); // 100.0
-        IO.println(sekToUsd(1000));           // 91.99…
-        IO.println(sekToEur(1000));           // 88.33…
-        IO.println(calculateBmi(75, 1.80));   // 23.14…
-        IO.println(bmiCategory(18.4));        // Underweight
-        IO.println(bmiCategory(18.5));        // Normal weight
-        IO.println(bmiCategory(25.0));        // Overweight
-        IO.println(bmiCategory(30.0));
+        printMenu();
+        int choice = Integer.parseInt(IO.readln("Choose an option: "));
+        if (choice == 4) {
+            IO.println("Goodbye!");
+        }
     }
 }
