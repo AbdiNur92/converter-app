@@ -60,6 +60,26 @@ public class ConverterApp {
         IO.println("4. Exit");
         IO.println(LINE);
     }
+    static void temperatureConverter() {
+        IO.println("--- Temperature Converter ---");
+        IO.println("Convert: ");
+        IO.println("  1. Celsius to Fahrenheit");
+        IO.println("  2. Fahrenheit to Celsius");
+        int direction = Integer.parseInt(IO.readln("Your choice: "));
+
+        if ( direction == 1) {
+            double celsius = Double.parseDouble(IO.readln("Enter temperature in Celsius: "));
+            double fahrenheit = celsiusToFahrenheit(celsius);
+            IO.println(String.format(Locale.US, "Result: %.2f C = %.2f F", celsius, fahrenheit));
+            IO.println(LINE);
+        }
+        else {
+            double fahrenheit = Double.parseDouble(IO.readln("Enter temperature in Fahrenheit: "));
+            double celsius = fahrenheitToCelsius(fahrenheit);
+            IO.println(String.format(Locale.US, "Result: %.2f F = %.2f C", fahrenheit, celsius));
+            IO.println(LINE);
+        }
+    }
 
     // constants: rates and fixed values
     // one method per conversion, return result
@@ -69,10 +89,17 @@ public class ConverterApp {
     // Loop menu, convert. until exit "Continue (yes/no)".
 
     void main () {
+
         printMenu();
         int choice = Integer.parseInt(IO.readln("Choose an option: "));
         if (choice == 4) {
             IO.println("Goodbye!");
+        } else if (choice == 1 ) {
+            IO.println();
+            temperatureConverter();
         }
+
     }
+
+
 }
