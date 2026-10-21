@@ -22,7 +22,7 @@ public class ConverterApp {
 
     //Methods
     static double celsiusToFahrenheit(double celsius) {
-        return celsius * CELSIUS_TO_FAHRENHEIT + 32;
+        return celsius * CELSIUS_TO_FAHRENHEIT + FAHRENHEIT_OFFSET;
     }
     static double fahrenheitToCelsius(double farenheit) {
         return (farenheit - FAHRENHEIT_OFFSET) * FAHRENHEIT_TO_CELSIUS;
@@ -34,7 +34,7 @@ public class ConverterApp {
         return sek / SEK_PER_EUR;
     }
     static double calculateBmi(double weightKg, double heightM) {
-        return weightKg / (heightM * heightM);
+        return weightKg / Math.pow(heightM, 2);
     }
     static String bmiCategory(double bmi) {
         if (bmi < NORMAL_WEIGHT_FROM) {
@@ -62,7 +62,7 @@ public class ConverterApp {
     }
     static void temperatureConverter() {
         IO.println("--- Temperature Converter ---");
-        IO.println("Convert: ");
+        IO.println("Convert:");
         IO.println("  1. Celsius to Fahrenheit");
         IO.println("  2. Fahrenheit to Celsius");
         int direction = Integer.parseInt(IO.readln("Your choice: "));
@@ -71,18 +71,16 @@ public class ConverterApp {
             double celsius = Double.parseDouble(IO.readln("Enter temperature in Celsius: "));
             double fahrenheit = celsiusToFahrenheit(celsius);
             IO.println(String.format(Locale.US, "Result: %.2f C = %.2f F", celsius, fahrenheit));
-            IO.println(LINE);
         }
         else {
             double fahrenheit = Double.parseDouble(IO.readln("Enter temperature in Fahrenheit: "));
             double celsius = fahrenheitToCelsius(fahrenheit);
             IO.println(String.format(Locale.US, "Result: %.2f F = %.2f C", fahrenheit, celsius));
-            IO.println(LINE);
         }
     }
     static void currencyConverter() {
         IO.println("--- Currency Converter ---");
-        IO.println("Convert: ");
+        IO.println("Convert:");
         IO.println("  1. SEK to USD");
         IO.println("  2. SEK to EUR");
         int direction = Integer.parseInt(IO.readln("Your choice: "));
@@ -102,7 +100,7 @@ public class ConverterApp {
         double heightM = Double.parseDouble(IO.readln("Enter height in metres: "));
         double bmi = calculateBmi(weightKg, heightM);
         String category = bmiCategory(bmi);
-        IO.println(String.format(Locale.US, "BMI: %.2f  ->  %s ", bmi, category));
+        IO.println(String.format(Locale.US, "BMI: %.2f  ->  %s", bmi, category));
     }
 
     // constants: rates and fixed values
@@ -113,26 +111,35 @@ public class ConverterApp {
     // Loop menu, convert. until exit "Continue (yes/no)".
 
     void main () {
-
-        printMenu();
-        int choice = Integer.parseInt(IO.readln("Choose an option: "));
-        if (choice == 4) {
-            IO.println("Goodbye!");
-        } else if (choice == 1 ) {
-            IO.println();
-            temperatureConverter();
+        boolean running = true;
+        while (running) {
+            printMenu();
+            int choice = Integer.parseInt(IO.readln("Choose an option: "));
+            if (choice == 4) {
+                running = false;
+            }
+            else {
+                if (choice == 1 ) {
+                    IO.println();
+                    temperatureConverter();
+                }
+                else if (choice == 2 ) {
+                    IO.println();
+                    currencyConverter();
+                }
+                else if (choice == 3 ) {
+                    IO.println();
+                    bmiCalculator();
+                }
+                IO.println("");
+                running = IO.readln("Continue? (yes/no): ").equalsIgnoreCase("yes");
+                if (running) {
+                    IO.println();
+                }
+            }
         }
-        else if (choice == 2 ) {
-            IO.println();
-            currencyConverter();
-        }
-        else if (choice == 3 ) {
-            IO.println();
-            bmiCalculator();
-        }
+        IO.println("Goodbye!");
 
 
     }
-
-
 }
