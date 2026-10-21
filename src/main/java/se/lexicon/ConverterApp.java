@@ -80,6 +80,23 @@ public class ConverterApp {
             IO.println(LINE);
         }
     }
+    static void currencyConverter() {
+        IO.println("--- Currency Converter ---");
+        IO.println("Convert: ");
+        IO.println("  1. SEK to USD");
+        IO.println("  2. SEK to EUR");
+        int direction = Integer.parseInt(IO.readln("Your choice: "));
+        double sek = Double.parseDouble(IO.readln("Enter amount in SEK: "));
+        if ( direction == 1) {
+            double usd = sekToUsd(sek);
+            IO.println(String.format(Locale.US, "Result: %.2f SEK = %.2f USD", sek, usd));
+        }
+        else {
+            double eur = sekToEur(sek);
+            IO.println(String.format(Locale.US, "Result: %.2f SEK = %.2f EUR", sek, eur));
+        }
+
+    }
 
     // constants: rates and fixed values
     // one method per conversion, return result
@@ -98,6 +115,11 @@ public class ConverterApp {
             IO.println();
             temperatureConverter();
         }
+        else if (choice == 2 ) {
+            IO.println();
+            currencyConverter();
+        }
+
 
     }
 
