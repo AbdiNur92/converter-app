@@ -95,7 +95,14 @@ public class ConverterApp {
             double eur = sekToEur(sek);
             IO.println(String.format(Locale.US, "Result: %.2f SEK = %.2f EUR", sek, eur));
         }
-
+    }
+    static void bmiCalculator() {
+        IO.println("--- BMI Calculator ---");
+        double weightKg = Double.parseDouble(IO.readln("Enter weight in kg: "));
+        double heightM = Double.parseDouble(IO.readln("Enter height in metres: "));
+        double bmi = calculateBmi(weightKg, heightM);
+        String category = bmiCategory(bmi);
+        IO.println(String.format(Locale.US, "BMI: %.2f  ->  %s ", bmi, category));
     }
 
     // constants: rates and fixed values
@@ -118,6 +125,10 @@ public class ConverterApp {
         else if (choice == 2 ) {
             IO.println();
             currencyConverter();
+        }
+        else if (choice == 3 ) {
+            IO.println();
+            bmiCalculator();
         }
 
 
